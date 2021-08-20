@@ -14,7 +14,7 @@ namespace Challenge1_KomodoCafe
             get { return _calories; }
             set { _calories = value; }
         }
-        public string Name { get; set; }
+        public string MealName { get; set; }
         private double _price;
         public Double Price
         {
@@ -25,9 +25,9 @@ namespace Challenge1_KomodoCafe
         public string MealNumber { get; set; }
         public string Ingredients { get; set; }
 
-        public MenuClass(string name, string description, string mealNumber, string ingredients, int calories, double price)
+        public MenuClass(string mealName, string description, string mealNumber, string ingredients, int calories, double price)
         {
-            Name = name;
+            MealName = mealName;
             Calories = calories;
             Description = description;
             MealNumber = mealNumber;
