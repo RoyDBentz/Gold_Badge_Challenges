@@ -16,15 +16,15 @@ namespace Challenge1_KomodoCafe
         public string MealNumber { get; set; }
         public string Ingredients { get; set; }
         public MenuItem() { }
-            public MenuItem(string mealNumber, string mealName, string description, string ingredients, double price, string calories)
-            {
-                MealName = mealName;
-                Calories = calories;
-                Description = description;
-                MealNumber = mealNumber;
-                Ingredients = ingredients;
-                Price = price;
-            }
+        public MenuItem(string mealNumber, string mealName, string description, string ingredients, double price, string calories)
+        {
+           MealName = mealName;
+           Calories = calories;
+           Description = description;
+           MealNumber = mealNumber;
+           Ingredients = ingredients;
+           Price = price;
+        }
         
     }
 }

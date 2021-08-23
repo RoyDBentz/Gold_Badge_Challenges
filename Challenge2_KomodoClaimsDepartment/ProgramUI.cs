@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Challenge1_KomodoCafe
+namespace Challenge2_KomodoClaimsDepartment
 {
     class ProgramUI
-    {
-        MenuRepository _repo = new MenuRepository();
+    {        
+        Queue<Claim> _claim = new Queue<Claim>();
         public void Run()
         {
             SeedContent();
@@ -17,15 +17,15 @@ namespace Challenge1_KomodoCafe
 
         public void SeedContent()
         {
-            MenuItem firstItem = new MenuItem("1", "Perfection", "1/3 lb. Burger with lettuce, tomato, bacon, onion, carmalized mushrooms, on a pretzel bun served with fries.", "Burger, Lettuce, Tomato, Bacon, Onion, Mushroom, Pretzel Bread, with potato.", 4.99, "653");
+            Claim firstItem = new Claim("1", "Car", "Car accident on 465", 400, 4,25,18 , 4,27,18, true );
 
-            MenuItem secondtItem = new MenuItem("2", "Logistics", "Grilled chicken wrapped with lettuce, tomato, croutons, in a spinach wrap for eating on the go.", "Chicken, Lettuce, Tomato, Croutons, Spinach Wrap", 3.99, "325");
+            Claim secondtItem = new Claim("2", "Logistics", "Grilled chicken wrapped with lettuce, tomato, croutons, in a spinach wrap for eating on the go.", "Chicken, Lettuce, Tomato, Croutons, Spinach Wrap", 3.99, "325");
 
-            MenuItem thirdItem = new MenuItem("3", "Shake it Up", "Enjoy the blue moo cookie dough milk shake topped with whip cream and 3 cherries.", "Ice Cream, cookie dough, NATURAL AND ARTIFICIAL FLAVOR, BLUE 1", 2.99, "575");
+            Claim thirdItem = new Claim("3", "Shake it Up", "Enjoy the blue moo cookie dough milk shake topped with whip cream and 3 cherries.", "Ice Cream, cookie dough, NATURAL AND ARTIFICIAL FLAVOR, BLUE 1", 2.99, "575");
 
-            _repo.AddMenuItem(firstItem);
-            _repo.AddMenuItem(secondtItem);
-            _repo.AddMenuItem(thirdItem);
+            _claim.Enqueue(firstItem);
+            _claim.Enqueue(secondtItem);
+            _claim.Enqueue(thirdItem);
         }
 
         public void Menu()
@@ -43,15 +43,15 @@ namespace Challenge1_KomodoCafe
                 switch (menuSelection)
                 {
                     case "1":
-                        AddMenuItem();
+                        SeeAllClaims();
                         break;
 
                     case "2":
-                        RemoveMenuItem();
+                        TakeCareOfNextClaim();
                         break;
 
                     case "3":
-                        ShowAllMenuItems();
+                        EnterNewClaim();
                         break;
 
                     case "4":
@@ -70,7 +70,7 @@ namespace Challenge1_KomodoCafe
 
                 }
             }
-            void AddMenuItem()
+            void EnterNewClaim()
             {
                 Console.Clear();
                 MenuItem item = new MenuItem();
@@ -101,7 +101,7 @@ namespace Challenge1_KomodoCafe
                 _repo.AddMenuItem(item);
 
             }
-            void RemoveMenuItem()
+            void TakeCareOfNextClaim()
             {
                 Console.Clear();
                 ShowAllMenuItems();
@@ -144,7 +144,7 @@ namespace Challenge1_KomodoCafe
                 Console.WriteLine($"#{item.MealNumber} -{item.MealName}- \nDescription: {item.Description} \nIngredients: {item.Ingredients} \nCalories: {item.Calories} \nPrice: {item.Price}");
             }
 
-            void ShowAllMenuItems()
+            void SeeAllClaims()
             {
                 Console.Clear();
                 List<MenuItem> items = _repo.GetAllMenuItems();
