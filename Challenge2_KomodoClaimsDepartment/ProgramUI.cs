@@ -17,11 +17,11 @@ namespace Challenge2_KomodoClaimsDepartment
 
         public void SeedContent()
         {
-            Claim firstItem = new Claim("1", "Car", "Car accident on 465", 400, Convert.ToDateTime(4/25/18) , Convert.ToDateTime(4 / 27 / 18), true );
+            Claim firstItem = new Claim("1", "Car", "Car accident on 465", 400, new DateTime(2018, 4, 25) , new DateTime(2018, 4, 27), true );
 
-            Claim secondtItem = new Claim("2", "Home", "House fire in kitchen.", 4000, Convert.ToDateTime(4 / 11 / 18), Convert.ToDateTime(4 / 12 / 18), true);
+            Claim secondtItem = new Claim("2", "Home", "House fire in kitchen.", 4000, new DateTime (2018,4,11), new DateTime (2018, 4, 12), true);
 
-            Claim thirdItem = new Claim("1", "Car", "Car accident on 465", 400, Convert.ToDateTime(4 / 27 / 18), Convert.ToDateTime(6/1/18), false);
+            Claim thirdItem = new Claim("1", "Car", "Car accident on 465", 400, new DateTime (2018, 4, 27), new DateTime(2018, 6, 1), false);
 
             _claim.Enqueue(firstItem);
             _claim.Enqueue(secondtItem);
@@ -33,10 +33,10 @@ namespace Challenge2_KomodoClaimsDepartment
             bool continueToRun = true;
             while (continueToRun)
             {
-                Console.WriteLine("What would you like to do?\n" +
-                    "1. Add New Item\n" +
-                    "2. Remove existing item\n" +
-                    "3. View all items\n" +
+                Console.WriteLine("Komodo Claims Menu\n" +
+                    "1. See all claims\n" +
+                    "2. Take care of next claim\n" +
+                    "3. Enter new claim\n" +
                     "4. Exit Program\n");
                 string menuSelection = Console.ReadLine();
 
@@ -111,7 +111,7 @@ namespace Challenge2_KomodoClaimsDepartment
                        
             void DisplayItems(Claim claim)
             {
-                Console.WriteLine($"{claim.ClaimID} -{claim.ClaimType}- \nDescription: {claim.Description} \nIngredients: {claim.ClaimAmount} \nCalories: {claim.DateOfIncident} \nPrice: {claim.DateOfClaim}");
+                Console.WriteLine($"{claim.ClaimID} -{claim.ClaimType}- \n{claim.Description} \n{claim.ClaimAmount} \n{claim.DateOfIncident} \n{claim.DateOfClaim}");
             }
 
             void SeeAllClaims()
