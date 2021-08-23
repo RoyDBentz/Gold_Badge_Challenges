@@ -6,34 +6,53 @@ using System.Threading.Tasks;
 
 namespace Challenge1_KomodoCafe
 {
-    public class MenuItem
+    public class MenuRepository
     {
-        private int _calories;
-        public int Calories
+        List<MenuItem> _menuItem = new List<MenuItem>();
+        // C           
+        public void AddMenuItem(MenuItem menuItem)
         {
-            get { return _calories; }
-            set { _calories = value; }
+            _menuItem.Add(menuItem);           
         }
-        public string MealName { get; set; }
-        private double _price;
-        public Double Price
+        // R
+        public List<MenuItem> GetAllMenuItems()
         {
-            get { return _price; }
-            set { _price = value; }
+            return _menuItem;
         }
-        public string Description { get; set; }
-        public string MealNumber { get; set; }
-        public string Ingredients { get; set; }
+        // U
 
-        public MenuItem() { }   // Empty constructor
-        public MenuItem(string mealNumber, string mealName, string description, string ingredients, double price, int calories)
+        // D
+        public bool RemoveMenuItem(string name)
         {
-            MealName = mealName;
-            Calories = calories;
-            Description = description;
-            MealNumber = mealNumber;
-            Ingredients = ingredients;
-            Price = price;
+            MenuItem menuItem = GetMenuItemByName(name);
+            if (name== null)
+            {
+                return false;
+            }
+            int itemCount = _menuItem.Count;
+            _menuItem.Remove(menuItem);
+
+            if (itemCount > _menuItem.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+
+        public MenuItem GetMenuItemByName(string name)
+        {
+            foreach(MenuItem menuItem in _menuItem)
+            {
+                if (menuItem.MealName == name)
+                {
+                    return menuItem;
+                }
+            }
+            return null;
+        }
+
     }
 }
