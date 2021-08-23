@@ -8,7 +8,7 @@ namespace Challenge2_KomodoClaimsDepartment
 {
     class ProgramUI
     {        
-        Queue<Claim> _claim = new Queue<Claim>();
+        readonly Queue<Claim> _claim = new Queue<Claim>();
         public void Run()
         {
             SeedContent();
@@ -47,7 +47,7 @@ namespace Challenge2_KomodoClaimsDepartment
                         break;
 
                     case "2":
-                        TakeCareOfNextClaim();
+                        NextClaim();
                         break;
 
                     case "3":
@@ -100,47 +100,18 @@ namespace Challenge2_KomodoClaimsDepartment
                 _claim.Enqueue(claim);
 
             }
-            void TakeCareOfNextClaim()
+            void NextClaim()
             {
                 Console.Clear();
-                SeeAllClaims();
-                Console.WriteLine("Enter meal name of meal you would like to remove:");
-                string name = Console.ReadLine();
-                Claim claim = _claim.GetClaimByClaimID();
-                if (claim == null)
-                {
-                    Console.WriteLine("Item name not found.");
-                }
-                else
-                {
-                    DisplayItems(claim);
-                    Console.WriteLine("Are you sure you want to delete item? 1 = Yes, 2 = No");
-                    string answer = Console.ReadLine();
-                    while (answer != "1" || answer != "2")
-                    {
-                        if (answer == "1")
-                        {
-                            _claim.Dequeue();
-                            break;
-                        }
-                        else if (answer == "2")
-                        {
-                            Console.WriteLine("You chose not to delete the claim.");                            
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid selection.");
-                            Console.WriteLine("Are you sure you want to delete item? 1 = Yes, 2 = No");
-                            answer = Console.ReadLine();
-                        }
-                    }
-                }
+                Queue<Claim> claims = new Queue<Claim>();                
 
-            }
+                Console.WriteLine(claims.Peek());
+                ContinueMessage();
+            }           
+                       
             void DisplayItems(Claim claim)
             {
-                Console.WriteLine($"#{claim.ClaimID} -{claim.ClaimType}- \nDescription: {claim.Description} \nIngredients: {claim.ClaimAmount} \nCalories: {claim.DateOfIncident} \nPrice: {claim.DateOfClaim}");
+                Console.WriteLine($"{claim.ClaimID} -{claim.ClaimType}- \nDescription: {claim.Description} \nIngredients: {claim.ClaimAmount} \nCalories: {claim.DateOfIncident} \nPrice: {claim.DateOfClaim}");
             }
 
             void SeeAllClaims()
@@ -160,5 +131,6 @@ namespace Challenge2_KomodoClaimsDepartment
             }
 
         }
+
     }
 }

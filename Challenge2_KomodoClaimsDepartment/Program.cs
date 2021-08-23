@@ -10,6 +10,8 @@ namespace Challenge2_KomodoClaimsDepartment
     {
         static void Main(string[] args)
         {
+            ProgramUI ui = new ProgramUI();
+            ui.Run();
         }
     }
 }
