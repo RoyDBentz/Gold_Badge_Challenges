@@ -17,11 +17,11 @@ namespace Challenge2_KomodoClaimsDepartment
 
         public void SeedContent()
         {
-            Claim firstItem = new Claim("1", "Car", "Car accident on 465", 400, 4,25,18 , 4,27,18, true );
+            Claim firstItem = new Claim("1", "Car", "Car accident on 465", 400, Convert.ToDateTime(4/25/18) , Convert.ToDateTime(4 / 27 / 18), true );
 
-            Claim secondtItem = new Claim("2", "Logistics", "Grilled chicken wrapped with lettuce, tomato, croutons, in a spinach wrap for eating on the go.", "Chicken, Lettuce, Tomato, Croutons, Spinach Wrap", 3.99, "325");
+            Claim secondtItem = new Claim("2", "Home", "House fire in kitchen.", 4000, Convert.ToDateTime(4 / 11 / 18), Convert.ToDateTime(4 / 12 / 18), true);
 
-            Claim thirdItem = new Claim("3", "Shake it Up", "Enjoy the blue moo cookie dough milk shake topped with whip cream and 3 cherries.", "Ice Cream, cookie dough, NATURAL AND ARTIFICIAL FLAVOR, BLUE 1", 2.99, "575");
+            Claim thirdItem = new Claim("1", "Car", "Car accident on 465", 400, Convert.ToDateTime(4 / 27 / 18), Convert.ToDateTime(6/1/18), false);
 
             _claim.Enqueue(firstItem);
             _claim.Enqueue(secondtItem);
@@ -73,60 +73,59 @@ namespace Challenge2_KomodoClaimsDepartment
             void EnterNewClaim()
             {
                 Console.Clear();
-                MenuItem item = new MenuItem();
-                Console.WriteLine("What number for people to say when ordering would you like to assign?");
-                item.MealNumber = Console.ReadLine();
+                Claim claim = new Claim();
+                Console.WriteLine("What is new claim ID");
+                claim.ClaimID = Console.ReadLine();
                 Console.Clear();
 
-                Console.WriteLine("What is the name of the meal?");
-                item.MealName = Console.ReadLine();
+                Console.WriteLine("What is claim type 'Car, Home, Theft'");
+                claim.ClaimType = Console.ReadLine();
                 Console.Clear();
 
-                Console.WriteLine("What is the description of the meal?");
-                item.Description = Console.ReadLine();
+                Console.WriteLine("What is the description");
+                claim.Description = Console.ReadLine();
                 Console.Clear();
 
-                Console.WriteLine("What are the ingredients?");
-                item.Ingredients = Console.ReadLine();
+                Console.WriteLine("What is claim amount");
+                claim.ClaimAmount = Convert.ToDouble(Console.ReadLine());
                 Console.Clear();
 
-                Console.WriteLine("What is the price?");
-                string priceName = Console.ReadLine();
-                item.Price = Convert.ToDouble(priceName);
+                Console.WriteLine("What is date of incident");                
+                claim.DateOfIncident = Convert.ToDateTime(Console.ReadLine());
                 Console.Clear();
 
-                Console.WriteLine("How many calories does this meal have?");
-                item.Calories = Console.ReadLine();
+                Console.WriteLine("What is date of claim");
+                claim.DateOfClaim = Convert.ToDateTime(Console.ReadLine());
 
-                _repo.AddMenuItem(item);
+                _claim.Enqueue(claim);
 
             }
             void TakeCareOfNextClaim()
             {
                 Console.Clear();
-                ShowAllMenuItems();
+                SeeAllClaims();
                 Console.WriteLine("Enter meal name of meal you would like to remove:");
                 string name = Console.ReadLine();
-                MenuItem item = _repo.GetMenuItemByName(name);
-                if (item == null)
+                Claim claim = _claim.GetClaimByClaimID();
+                if (claim == null)
                 {
                     Console.WriteLine("Item name not found.");
                 }
                 else
                 {
-                    DisplayItems(item);
+                    DisplayItems(claim);
                     Console.WriteLine("Are you sure you want to delete item? 1 = Yes, 2 = No");
                     string answer = Console.ReadLine();
                     while (answer != "1" || answer != "2")
                     {
                         if (answer == "1")
                         {
-                            _repo.RemoveMenuItem(name);
+                            _claim.Dequeue();
                             break;
                         }
                         else if (answer == "2")
                         {
-                            Console.WriteLine("You chose not to delete the item.");                            
+                            Console.WriteLine("You chose not to delete the claim.");                            
                             break;
                         }
                         else
@@ -139,18 +138,18 @@ namespace Challenge2_KomodoClaimsDepartment
                 }
 
             }
-            void DisplayItems(MenuItem item)
+            void DisplayItems(Claim claim)
             {
-                Console.WriteLine($"#{item.MealNumber} -{item.MealName}- \nDescription: {item.Description} \nIngredients: {item.Ingredients} \nCalories: {item.Calories} \nPrice: {item.Price}");
+                Console.WriteLine($"#{claim.ClaimID} -{claim.ClaimType}- \nDescription: {claim.Description} \nIngredients: {claim.ClaimAmount} \nCalories: {claim.DateOfIncident} \nPrice: {claim.DateOfClaim}");
             }
 
             void SeeAllClaims()
             {
                 Console.Clear();
-                List<MenuItem> items = _repo.GetAllMenuItems();
-                foreach (MenuItem content in items)
+                Queue<Claim> claims = new Queue<Claim>();
+                foreach (Claim claim in _claim)
                 {
-                    DisplayItems(content);
+                    DisplayItems(claim);
                     Console.WriteLine();
                 }
             }
