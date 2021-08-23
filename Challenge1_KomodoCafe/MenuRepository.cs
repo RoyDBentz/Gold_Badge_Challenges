@@ -8,7 +8,7 @@ namespace Challenge1_KomodoCafe
 {
     public class MenuRepository
     {
-        List<MenuItem> _menuItem = new List<MenuItem>();
+        readonly List<MenuItem> _menuItem = new List<MenuItem>();
         // C           
         public void AddMenuItem(MenuItem menuItem)
         {

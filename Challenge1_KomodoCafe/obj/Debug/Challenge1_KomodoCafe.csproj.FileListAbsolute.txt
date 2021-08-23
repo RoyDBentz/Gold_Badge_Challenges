@@ -11,3 +11,4 @@ D:\ElevenFiftyProjects\Gold Badge Challenges\Gold_Badge_Challenges\Challenge1_Ko
 D:\ElevenFiftyProjects\Gold Badge Challenges\Gold_Badge_Challenges\Challenge1_KomodoCafe\obj\Debug\Challenge1_KomodoCafe.pdb
 D:\ElevenFiftyProjects\Gold Badge Challenges\Gold_Badge_Challenges\Challenge1_KomodoCafe\bin\Debug\Challenge1_KomodoCafe.exe
 D:\ElevenFiftyProjects\Gold Badge Challenges\Gold_Badge_Challenges\Challenge1_KomodoCafe\obj\Debug\Challenge1_KomodoCafe.exe
+D:\ElevenFiftyProjects\Gold Badge Challenges\Gold_Badge_Challenges\Challenge1_KomodoCafe\obj\Debug\Challenge1_KomodoCafe.csproj.AssemblyReference.cache
