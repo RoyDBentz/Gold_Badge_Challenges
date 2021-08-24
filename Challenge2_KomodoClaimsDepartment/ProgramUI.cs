@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,7 @@ namespace Challenge2_KomodoClaimsDepartment
                 switch (menuSelection)
                 {
                     case "1":
+                        bool columnNames = true;
                         SeeAllClaims();
                         break;
 
@@ -113,13 +115,14 @@ namespace Challenge2_KomodoClaimsDepartment
             {
                 string incidentDate = claim.DateOfIncident.ToString("MM/dd/yy");                 
                 string claimDate = claim.DateOfClaim.ToString("MM/dd/yy");                 
-                Console.WriteLine($"{claim.ClaimID} -{claim.ClaimType}- \n{claim.Description} \n{claim.ClaimAmount} \n{incidentDate} \n{claimDate}");
+                Console.WriteLine($"{claim.ClaimID} \t{claim.ClaimType} \t{claim.Description} \t{claim.ClaimAmount} \t{incidentDate} \t{claimDate}");
             }
 
             void SeeAllClaims()
             {
                 Console.Clear();
                 Queue<Claim> claims = new Queue<Claim>();
+                ColumnNames();
                 foreach (Claim claim in _claim)
                 {
                     DisplayItems(claim);
@@ -131,6 +134,25 @@ namespace Challenge2_KomodoClaimsDepartment
                 Console.WriteLine("Press any key to continue.");
                 Console.ReadLine();
             }
+            void ColumnNames()
+            {
+                Console.WriteLine($"\n\nClaimID \tType \tDescription \tAmount \tDateOfAccident \tDateOfClaim \tIsValid");
+            }
+            /*void ColumnAndRows(Claim claim)
+            {
+                DataTable table = new DataTable();
+                table.Columns.Add(claim.ClaimID, claim.ClaimType, claim.Description, claim.ClaimAmount, claim.DateOfIncident, claim.DateOfClaim, claim.IsValid);
+                // Use the NewRow method to create a DataRow with
+                // the table's schema.
+                DataRow newRow = table.NewRow();
+
+                // Set values in the columns:
+                newRow[claim.ClaimID] = "NewCompanyID";
+                newRow[claim.ClaimID, claim.ClaimType, claim.Description, claim.ClaimAmount, claim.DateOfIncident, claim.DateOfClaim, claim.IsValid] = "NewCompanyName";
+
+                // Add the row to the rows collection.
+                table.Rows.Add(newRow);
+            }*/
 
         }
 
