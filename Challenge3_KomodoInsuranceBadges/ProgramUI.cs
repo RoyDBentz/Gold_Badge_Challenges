@@ -9,7 +9,7 @@ namespace Challenge2_KomodoClaimsDepartment
 {
     class ProgramUI
     {        
-        readonly Queue<Claim> _claim = new Queue<Claim>();
+        readonly Dictionary<Cl _claim = new Queue<Claim>();
         public void Run()
         {
             SeedContent();
@@ -34,25 +34,25 @@ namespace Challenge2_KomodoClaimsDepartment
             bool continueToRun = true;
             while (continueToRun)
             {
-                Console.WriteLine("Komodo Claims Menu\n" +
-                    "1. See all claims\n" +
-                    "2. Take care of next claim\n" +
-                    "3. Enter new claim\n" +
+                Console.WriteLine("Hello Security Admin, What would you like to do?\n" +
+                    "1. Add a badge\n" +
+                    "2. Edit a badge\n" +
+                    "3. List all badges\n" +
                     "4. Exit Program\n");
                 string menuSelection = Console.ReadLine();
 
                 switch (menuSelection)
                 {
                     case "1":                        
-                        SeeAllClaims();
+                        AddABadge();
                         break;
 
                     case "2":
-                        NextClaim();
+                        EditABadge();
                         break;
 
                     case "3":
-                        EnterNewClaim();
+                        ListAllBadges();
                         break;
 
                     case "4":
@@ -70,7 +70,7 @@ namespace Challenge2_KomodoClaimsDepartment
 
                 }
             }
-            void EnterNewClaim()
+            void AddABadge()
             {
                 Console.Clear();
                 Claim claim = new Claim();
@@ -101,7 +101,7 @@ namespace Challenge2_KomodoClaimsDepartment
                 _claim.Enqueue(claim);
 
             }
-            void NextClaim()
+            void EditABadge()
             {
                 Console.Clear();
                 Queue<Claim> claims = new Queue<Claim>();                
@@ -117,7 +117,7 @@ namespace Challenge2_KomodoClaimsDepartment
                 Console.WriteLine($"{claim.ClaimID} \t{claim.ClaimType} \t{claim.Description} \t\t${claim.ClaimAmount} \t\t{incidentDate} \t\t{claimDate}");
             }
 
-            void SeeAllClaims()
+            void ListAllBadges()
             {
                 Console.Clear();                
                 ColumnNames();
@@ -133,9 +133,15 @@ namespace Challenge2_KomodoClaimsDepartment
                 Console.ReadKey();
                 Console.Clear();
             }
+            void InvalidSelection()
+            {
+                Console.WriteLine("Invalid selection");
+                ContinueMessage();
+            }
             void ColumnNames()
             {
-                Console.WriteLine($"\n\nClaimID Type \t\tDescription \tAmount \t\tDateOfAccident \t\tDateOfClaim \t\tIsValid");
+                Console.WriteLine($"\n\nKey");
+                Console.WriteLine($"\n\nBadge # \t\tDoor Access");
             }
         }
 

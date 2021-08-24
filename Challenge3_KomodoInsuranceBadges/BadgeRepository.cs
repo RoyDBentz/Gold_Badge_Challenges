@@ -8,5 +8,12 @@ namespace Challenge3_KomodoInsuranceBadges
 {
     class BadgeRepository
     {
+        Dictionary<string, string> badgeID = new Dictionary<string, string>();
+
+        // Create
+        
+        // Read
+        // Update
+        // Delete
     }
 }

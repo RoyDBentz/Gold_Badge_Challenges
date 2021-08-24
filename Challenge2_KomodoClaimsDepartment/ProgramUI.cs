@@ -18,11 +18,11 @@ namespace Challenge2_KomodoClaimsDepartment
 
         public void SeedContent()
         {
-            Claim firstItem = new Claim("1", "Car", "Car accident on 465", 400, new DateTime(2018, 4, 25) , new DateTime(2018, 4, 27), true);
+            Claim firstItem = new Claim("1", ClaimType.Car, "Car accident on 465", 400, new DateTime(2018, 4, 25) , new DateTime(2018, 4, 27), true);
 
-            Claim secondtItem = new Claim("2", "Home", "House fire in kitchen.", 4000, new DateTime (2018,4,11), new DateTime (2018, 4, 12), true);
+            Claim secondtItem = new Claim("2", ClaimType.Home, "House fire in kitchen.", 4000, new DateTime (2018,4,11), new DateTime (2018, 4, 12), true);
 
-            Claim thirdItem = new Claim("3", "Car", "Car accident on 465", 400, new DateTime (2018, 4, 27), new DateTime(2018, 6, 1), false);
+            Claim thirdItem = new Claim("3", ClaimType.Theft, "Car accident on 465", 400, new DateTime (2018, 4, 27), new DateTime(2018, 6, 1), false);
 
             _claim.Enqueue(firstItem);
             _claim.Enqueue(secondtItem);
@@ -79,8 +79,15 @@ namespace Challenge2_KomodoClaimsDepartment
                 Console.Clear();
 
                 Console.WriteLine("What is claim type \n1 = Car \n2 = Home \n3 = Theft");
-                
-                claim.ClaimType = Console.ReadLine();                
+                string claimType = Console.ReadLine();
+                while (claimType != "1" && claimType != "2" && claimType != "3")
+                {
+                    InvalidSelection();
+                    Console.WriteLine("What is claim type \n1 = Car \n2 = Home \n3 = Theft");
+                    claimType = Console.ReadLine();
+                }
+                int claimsType = int.Parse(claimType);
+                claim.ClaimType = (ClaimType)claimsType;
                 Console.Clear();
 
                 Console.WriteLine("What is the description");
@@ -136,6 +143,11 @@ namespace Challenge2_KomodoClaimsDepartment
             void ColumnNames()
             {
                 Console.WriteLine($"\n\nClaimID Type \t\tDescription \tAmount \t\tDateOfAccident \t\tDateOfClaim \t\tIsValid");
+            }
+            void InvalidSelection()
+            {
+                Console.WriteLine("Invalid selection");
+                ContinueMessage();
             }
         }
 
