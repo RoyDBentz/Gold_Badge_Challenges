@@ -111,7 +111,9 @@ namespace Challenge2_KomodoClaimsDepartment
                        
             void DisplayItems(Claim claim)
             {
-                Console.WriteLine($"{claim.ClaimID} -{claim.ClaimType}- \n{claim.Description} \n{claim.ClaimAmount} \n{claim.DateOfIncident} \n{claim.DateOfClaim}");
+                string incidentDate = claim.DateOfIncident.ToString("MM/dd/yy");                 
+                string claimDate = claim.DateOfClaim.ToString("MM/dd/yy");                 
+                Console.WriteLine($"{claim.ClaimID} -{claim.ClaimType}- \n{claim.Description} \n{claim.ClaimAmount} \n{incidentDate} \n{claimDate}");
             }
 
             void SeeAllClaims()
