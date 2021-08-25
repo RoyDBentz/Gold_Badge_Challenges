@@ -9,7 +9,7 @@ namespace Challenge2_KomodoClaimsDepartment
     class Claim
     {
 
-        public string ClaimID { get; set; }
+        public int ClaimID { get; set; }
         public ClaimType ClaimType { get; set; }
         public string Description{ get; set; }
         public double ClaimAmount { get; set; }
@@ -17,9 +17,9 @@ namespace Challenge2_KomodoClaimsDepartment
         public DateTime DateOfClaim { get; set; }
         public bool IsValid { get; set; }
         public Claim() { }
-        public Claim(string claimID, ClaimType claimType, string description, double claimAmount, DateTime dateOfIncident, DateTime dateOfClaim, bool isValid)
+        public Claim(int claimID, ClaimType claimType, string description, double claimAmount, DateTime dateOfIncident, DateTime dateOfClaim, bool isValid)
         {
-            ClaimID = claimID;
+            ClaimID = claimID++;
             ClaimType = claimType;
             Description = description;
             ClaimAmount = claimAmount;

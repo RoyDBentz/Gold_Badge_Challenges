@@ -22,7 +22,7 @@ namespace Challenge2_KomodoClaimsDepartment
         // U
 
         // D
-        public bool RemoveClaim(string claimID)
+        public bool RemoveClaim(int claimID)
         {
             Claim claimsID = GetClaimByClaimID(claimID);
             if (claimID == null)
@@ -36,7 +36,7 @@ namespace Challenge2_KomodoClaimsDepartment
             }
         }
 
-        public Claim GetClaimByClaimID(string claimsID)
+        public Claim GetClaimByClaimID(int claimsID)
         {
             foreach (Claim claimID in _claim)
             {

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Challenge2_KomodoClaimsDepartment
+namespace Challenge3_KomodoInsuranceBadges
 {
     class ProgramUI
-    {        
-        readonly Dictionary<Cl _claim = new Queue<Claim>();
+    {
+        readonly Dictionary<string, string> _badge = new Dictionary<string, string>();
         public void Run()
         {
             SeedContent();
@@ -17,17 +17,10 @@ namespace Challenge2_KomodoClaimsDepartment
         }
 
         public void SeedContent()
-        {
-            Claim firstItem = new Claim("1", "Car", "Car accident on 465", 400, new DateTime(2018, 4, 25) , new DateTime(2018, 4, 27), true);
-
-            Claim secondtItem = new Claim("2", "Home", "House fire in kitchen.", 4000, new DateTime (2018,4,11), new DateTime (2018, 4, 12), true);
-
-            Claim thirdItem = new Claim("3", "Car", "Car accident on 465", 400, new DateTime (2018, 4, 27), new DateTime(2018, 6, 1), false);
-
-            _claim.Enqueue(firstItem);
-            _claim.Enqueue(secondtItem);
-            _claim.Enqueue(thirdItem);
+        {            
+            _badge.Add("12345", "B8");
         }
+
 
         public void Menu()
         {
@@ -63,8 +56,7 @@ namespace Challenge2_KomodoClaimsDepartment
                         break;
 
                     default:
-                        Console.WriteLine("Invalid selection");
-                        ContinueMessage();
+                        InvalidSelection();
                         break;
 
 
@@ -73,59 +65,33 @@ namespace Challenge2_KomodoClaimsDepartment
             void AddABadge()
             {
                 Console.Clear();
-                Claim claim = new Claim();
-                Console.WriteLine("What is new claim ID");
-                claim.ClaimID = Console.ReadLine();
+                Console.Write("What is the number on the badge:");
+                string badgeID = Console.ReadLine();                
                 Console.Clear();
 
-                Console.WriteLine("What is claim type \n1 = Car \n2 = Home \n3 = Theft");
-                
-                claim.ClaimType = Console.ReadLine();                
+                Console.Write("List a door that it needs access to:");
+                string door = Console.ReadLine();                
                 Console.Clear();
 
-                Console.WriteLine("What is the description");
-                claim.Description = Console.ReadLine();
+                Console.WriteLine("Any other doors(y/n)");
+                Console.ReadLine();
                 Console.Clear();
 
-                Console.WriteLine("What is claim amount");
-                claim.ClaimAmount = Convert.ToDouble(Console.ReadLine());
-                Console.Clear();
-
-                Console.WriteLine("What is date of incident");                
-                claim.DateOfIncident = Convert.ToDateTime(Console.ReadLine());
-                Console.Clear();
-
-                Console.WriteLine("What is date of claim");
-                claim.DateOfClaim = Convert.ToDateTime(Console.ReadLine());
-
-                _claim.Enqueue(claim);
-
+                _badge.Add(badgeID, door);
             }
             void EditABadge()
             {
-                Console.Clear();
-                Queue<Claim> claims = new Queue<Claim>();                
-
-                Console.WriteLine(claims.Peek());
+                Console.Clear();                    
                 ContinueMessage();
             }           
                        
-            void DisplayItems(Claim claim)
+            void DisplayItems()
             {
-                string incidentDate = claim.DateOfIncident.ToString("MM/dd/yy");                 
-                string claimDate = claim.DateOfClaim.ToString("MM/dd/yy");                 
-                Console.WriteLine($"{claim.ClaimID} \t{claim.ClaimType} \t{claim.Description} \t\t${claim.ClaimAmount} \t\t{incidentDate} \t\t{claimDate}");
             }
 
             void ListAllBadges()
             {
-                Console.Clear();                
                 ColumnNames();
-                foreach (Claim claim in _claim)
-                {
-                    DisplayItems(claim);
-                    Console.WriteLine();
-                }
             }
             void ContinueMessage()
             {
@@ -142,6 +108,10 @@ namespace Challenge2_KomodoClaimsDepartment
             {
                 Console.WriteLine($"\n\nKey");
                 Console.WriteLine($"\n\nBadge # \t\tDoor Access");
+            }
+            void AddDoors()
+            {
+                
             }
         }
 
