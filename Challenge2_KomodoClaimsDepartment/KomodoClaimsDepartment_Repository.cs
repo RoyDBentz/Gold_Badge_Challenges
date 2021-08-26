@@ -19,7 +19,12 @@ namespace Challenge2_KomodoClaimsDepartment
         {
             return _claim;
         }
-        // U
+
+        public Claim GetNextClaim()
+        {
+            return _claim.Peek();
+        }
+        // U - unneeded at present time
 
         // D
         public bool RemoveClaim()
@@ -34,18 +39,5 @@ namespace Challenge2_KomodoClaimsDepartment
                 return true;
             }
         }
-
-        /*public Claim GetClaimByClaimID(int claimsID)
-        {
-            foreach (Claim claimID in _claim)
-            {
-                if (claimID.ClaimID == claimsID)
-                {
-                    return claimID;
-                }
-            }
-            return null;
-        }*/
-
     }
 }
