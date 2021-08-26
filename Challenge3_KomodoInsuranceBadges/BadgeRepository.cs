@@ -19,10 +19,13 @@ namespace Challenge3_KomodoInsuranceBadges
                 return true;
             }
             else
-            {
-                _badgeID[badgeNumber] = new List<string>();
+            {                
                 return false;
             }
+        }
+        public bool AddDoorToBadge(string badgeID,string door)
+        {
+           return _badgeID.Add(badgeID,door);
         }
         // Read
         public Dictionary<string, List<string>> GetBadges()
@@ -30,27 +33,28 @@ namespace Challenge3_KomodoInsuranceBadges
             return _badgeID;
         }
         // Update
-        public bool UpdateBadge()
+        public bool UpdateBadgeDoorsOnBadge(string badgeNumber)
         {
-
+            GetBadgeListOfDoors(badgeNumber);            
+            return _badgeID.Remove(badgeNumber);
+            
         }
         // Delete
         public bool DeleteBadges(Badge badge)
         {
-            _badgeID.Remove(Badge);
+            return _badgeID.Remove(badge.BadgeID);
         }
 
-        public void GetBadgeValue<T>(string badgeNumber)
+        public List<string> GetBadgeListOfDoors(string badgeNumber)
         {
-            string door;
-            T retType;
-
-            _badgeID.TryGetValue(badgeNumber, out door);
-            try
+            foreach(KeyValuePair<string, List<string>> badge in _badgeID)
             {
-                retType = (T)badgeNumber;
+                if(badgeNumber == badge.Key)
+                {
+                    return badge.Value;
+                }
             }
-
+            return null;
         }
     }
 }

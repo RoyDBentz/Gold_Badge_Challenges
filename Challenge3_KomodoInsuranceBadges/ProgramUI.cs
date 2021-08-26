@@ -12,15 +12,8 @@ namespace Challenge3_KomodoInsuranceBadges
         readonly BadgeRepository badge = new BadgeRepository();
         public void Run()
         {
-            SeedContent();
             Menu();
         }
-
-        public void SeedContent()
-        {            
-            badge.NewBadgeNumber("12","5");
-        }
-
 
         public void Menu()
         {
@@ -64,6 +57,7 @@ namespace Challenge3_KomodoInsuranceBadges
             }
             void AddABadge()
             {
+
                 Console.Clear();
                 Console.Write("What is the number on the badge:");
                 string badgeID = Console.ReadLine();                
@@ -77,7 +71,7 @@ namespace Challenge3_KomodoInsuranceBadges
                 Console.ReadLine();
                 Console.Clear();
 
-                _badge.Add(badgeID, door);
+                badge.NewBadgeNumber(badgeID, door);
             }
             void EditABadge()
             {

@@ -1,11 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Challenge1_KomodoCafe
+namespace KomodoClaims_Tests
 {
-    [TestClass]
-    public class CafeUnitTest
+    class Program
     {
         static void Main(string[] args)
         {
@@ -13,6 +14,4 @@ namespace Challenge1_KomodoCafe
             ui.Run();
         }
     }
-
 }
-
