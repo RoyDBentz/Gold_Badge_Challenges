@@ -115,7 +115,7 @@ namespace Challenge2_KomodoClaimsDepartment
                 ContinueMessage();
             }           
                        
-            void DisplayItems(Claim claim)
+            void DisplayItems()
             {
                 Queue<Claim> claims = _claim.GetAllClaims();
                 foreach (Claim _claim in claims)
@@ -133,7 +133,7 @@ namespace Challenge2_KomodoClaimsDepartment
                 Claim claim = new Claim();
                 Console.Clear();                
                 ColumnNames();                               
-                DisplayItems(claim);
+                DisplayItems();
                 Console.WriteLine();     
             }
             void ContinueMessage()
