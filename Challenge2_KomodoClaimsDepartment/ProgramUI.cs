@@ -9,8 +9,8 @@ namespace Challenge2_KomodoClaimsDepartment
 {
     class ProgramUI
     {
-        KomodoClaimsDepartment_Repository claim = new KomodoClaimsDepartment_Repository();
-        Claim claims = new Claim();
+        readonly KomodoClaimsDepartment_Repository _claim = new KomodoClaimsDepartment_Repository();  
+        
         public void Run()
         {
             SeedContent();
@@ -19,15 +19,15 @@ namespace Challenge2_KomodoClaimsDepartment
 
         public void SeedContent()
         {
-            Claim one = new Claim(claims.ClaimID, ClaimType.Car, "Car accident on 465", 400, new DateTime(2018, 4, 25), new DateTime(2018, 4, 27), claims.IsValid);
+            Claim one = new Claim(1, ClaimType.Car, "Car accident on 465", 400, new DateTime(2018, 4, 25), new DateTime(2018, 4, 27));
 
-            Claim two = new Claim(claims.ClaimID, ClaimType.Home, "House fire in kitchen.", 4000, new DateTime(2018, 4, 11), new DateTime(2018, 4, 12), claims.IsValid);
+            Claim two = new Claim(2, ClaimType.Home, "House fire in kitchen.", 4000, new DateTime(2018, 4, 11), new DateTime(2018, 4, 12));
 
-            Claim three = new Claim(claims.ClaimID, ClaimType.Theft, "Car accident on 465", 400, new DateTime(2018, 4, 27), new DateTime(2018, 6, 1), claims.IsValid);
+            Claim three = new Claim(3, ClaimType.Theft, "Car accident on 465", 400, new DateTime(2018, 4, 27), new DateTime(2018, 6, 1));
 
-            claim.AddClaim(one);
-            claim.AddClaim(two);
-            claim.AddClaim(three);
+            _claim.AddClaim(one);
+            _claim.AddClaim(two);
+            _claim.AddClaim(three);
         }
 
         public void Menu()
@@ -75,6 +75,9 @@ namespace Challenge2_KomodoClaimsDepartment
             void EnterNewClaim()
             {
                 Console.Clear();
+
+                Claim newClaim = new Claim();
+
                 Console.WriteLine("What is claim type \n1 = Car \n2 = Home \n3 = Theft");
                 string claimType = Console.ReadLine();
                 while (claimType != "1" && claimType != "2" && claimType != "3")
@@ -84,48 +87,53 @@ namespace Challenge2_KomodoClaimsDepartment
                     claimType = Console.ReadLine();
                 }
                 int claimsType = int.Parse(claimType);
-                claims.ClaimType = (ClaimType)claimsType;
+                newClaim.ClaimType = (ClaimType)claimsType;
                 Console.Clear();
 
                 Console.WriteLine("What is the description");
-                claims.Description = Console.ReadLine();
+                newClaim.Description = Console.ReadLine();
                 Console.Clear();
 
                 Console.WriteLine("What is claim amount");
-                claims.ClaimAmount = Convert.ToDouble(Console.ReadLine());
+                newClaim.ClaimAmount = Convert.ToDouble(Console.ReadLine());
                 Console.Clear();
 
-                Console.WriteLine("What is date of incident");                
-                claims.DateOfIncident = Convert.ToDateTime(Console.ReadLine());
+                Console.WriteLine("What is date of incident");
+                newClaim.DateOfIncident = Convert.ToDateTime(Console.ReadLine());
                 Console.Clear();
 
                 Console.WriteLine("What is date of claim");
-                claims.DateOfClaim = Convert.ToDateTime(Console.ReadLine());
+                newClaim.DateOfClaim = Convert.ToDateTime(Console.ReadLine());
 
-                claim.AddClaim(claims);
+                _claim.AddClaim(newClaim);
 
             }
             void NextClaim()
             {
-                Console.Clear();                          
-                Console.WriteLine(claim.);
+                Console.Clear();   
+                Console.WriteLine();
                 ContinueMessage();
             }           
                        
             void DisplayItems(Claim claim)
             {
-                string incidentDate = claim.DateOfIncident.ToString("MM/dd/yy");                 
-                string claimDate = claim.DateOfClaim.ToString("MM/dd/yy");
-                IsItValid(claim);
-                ClaimIdNumber();
-                Console.WriteLine($"{claim.ClaimID} \t{claim.ClaimType} \t{claim.Description} \t\t${claim.ClaimAmount} \t\t{incidentDate} \t\t{claimDate} \t\t{claim.IsValid}");
+                Queue<Claim> claims = _claim.GetAllClaims();
+                foreach (Claim _claim in claims)
+                {
+                    string incidentDate = _claim.DateOfIncident.ToString("MM/dd/yy");
+                    string claimDate = _claim.DateOfClaim.ToString("MM/dd/yy");
+                    IsItValid(_claim);
+                    ClaimIdNumber();
+                    Console.WriteLine($"{_claim.ClaimID} \t{_claim.ClaimType} \t{_claim.Description} \t\t${_claim.ClaimAmount} \t\t{incidentDate} \t\t{claimDate} \t\t{_claim.IsValid}");
+                }
             }
 
             void SeeAllClaims()
             {
+                Claim claim = new Claim();
                 Console.Clear();                
                 ColumnNames();                               
-                DisplayItems(claims);
+                DisplayItems(claim);
                 Console.WriteLine();     
             }
             void ContinueMessage()

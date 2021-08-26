@@ -16,15 +16,14 @@ namespace Challenge2_KomodoClaimsDepartment
         public DateTime DateOfClaim { get; set; }
         public bool IsValid { get; set; }
         public Claim() { }
-        public Claim(int claimID, ClaimType claimType, string description, double claimAmount, DateTime dateOfIncident, DateTime dateOfClaim, bool isValid)
+        public Claim(int claimID, ClaimType claimType, string description, double claimAmount, DateTime dateOfIncident, DateTime dateOfClaim)
         {
             ClaimID = claimID;
             ClaimType = claimType;
             Description = description;
             ClaimAmount = claimAmount;
             DateOfIncident = dateOfIncident;
-            DateOfClaim = dateOfClaim;
-            IsValid = isValid;
+            DateOfClaim = dateOfClaim;            
         }
     }
 }

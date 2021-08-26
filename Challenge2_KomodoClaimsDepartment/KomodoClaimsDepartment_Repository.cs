@@ -8,7 +8,7 @@ namespace Challenge2_KomodoClaimsDepartment
 {
     class KomodoClaimsDepartment_Repository
     {
-        public Queue<Claim> _claim = new Queue<Claim>();
+        private readonly Queue<Claim> _claim = new Queue<Claim>();
         // C           
         public void AddClaim(Claim claim)
         {
@@ -31,11 +31,11 @@ namespace Challenge2_KomodoClaimsDepartment
             else
             {
                 _claim.Dequeue();
-                return false;
+                return true;
             }
         }
 
-        public Claim GetClaimByClaimID(int claimsID)
+        /*public Claim GetClaimByClaimID(int claimsID)
         {
             foreach (Claim claimID in _claim)
             {
@@ -45,7 +45,7 @@ namespace Challenge2_KomodoClaimsDepartment
                 }
             }
             return null;
-        }
+        }*/
 
     }
 }
