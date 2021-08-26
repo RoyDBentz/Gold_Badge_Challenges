@@ -9,7 +9,7 @@ namespace Challenge3_KomodoInsuranceBadges
 {
     class ProgramUI
     {
-        readonly Dictionary<string, string> _badge = new Dictionary<string, string>();
+        readonly BadgeRepository badge = new BadgeRepository();
         public void Run()
         {
             SeedContent();
@@ -18,7 +18,7 @@ namespace Challenge3_KomodoInsuranceBadges
 
         public void SeedContent()
         {            
-            _badge.Add("12345", "B8");
+            badge.NewBadgeNumber("12","5");
         }
 
 

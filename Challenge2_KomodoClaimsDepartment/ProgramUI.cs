@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace Challenge2_KomodoClaimsDepartment
 {
     class ProgramUI
-    {        
-        readonly Queue<Claim> _claim = new Queue<Claim>();
-        readonly Claim claims = new Claim();
+    {
+        KomodoClaimsDepartment_Repository claim = new KomodoClaimsDepartment_Repository();
+        Claim claims = new Claim();
         public void Run()
         {
             SeedContent();
@@ -19,19 +19,20 @@ namespace Challenge2_KomodoClaimsDepartment
 
         public void SeedContent()
         {
-            Claim firstItem = new Claim(claims.ClaimID, ClaimType.Car, "Car accident on 465", 400, new DateTime(2018, 4, 25), new DateTime(2018, 4, 27), claims.IsValid);
+            Claim one = new Claim(claims.ClaimID, ClaimType.Car, "Car accident on 465", 400, new DateTime(2018, 4, 25), new DateTime(2018, 4, 27), claims.IsValid);
 
-            Claim secondtItem = new Claim(claims.ClaimID, ClaimType.Home, "House fire in kitchen.", 4000, new DateTime(2018, 4, 11), new DateTime(2018, 4, 12), claims.IsValid);
+            Claim two = new Claim(claims.ClaimID, ClaimType.Home, "House fire in kitchen.", 4000, new DateTime(2018, 4, 11), new DateTime(2018, 4, 12), claims.IsValid);
 
-            Claim thirdItem = new Claim(claims.ClaimID, ClaimType.Theft, "Car accident on 465", 400, new DateTime(2018, 4, 27), new DateTime(2018, 6, 1), claims.IsValid);
+            Claim three = new Claim(claims.ClaimID, ClaimType.Theft, "Car accident on 465", 400, new DateTime(2018, 4, 27), new DateTime(2018, 6, 1), claims.IsValid);
 
-            _claim.Enqueue(firstItem);
-            _claim.Enqueue(secondtItem);
-            _claim.Enqueue(thirdItem);
+            claim.AddClaim(one);
+            claim.AddClaim(two);
+            claim.AddClaim(three);
         }
 
         public void Menu()
         {
+            SeedContent();
             bool continueToRun = true;
             while (continueToRun)
             {
@@ -73,8 +74,7 @@ namespace Challenge2_KomodoClaimsDepartment
             }
             void EnterNewClaim()
             {
-                
-
+                Console.Clear();
                 Console.WriteLine("What is claim type \n1 = Car \n2 = Home \n3 = Theft");
                 string claimType = Console.ReadLine();
                 while (claimType != "1" && claimType != "2" && claimType != "3")
@@ -102,15 +102,13 @@ namespace Challenge2_KomodoClaimsDepartment
                 Console.WriteLine("What is date of claim");
                 claims.DateOfClaim = Convert.ToDateTime(Console.ReadLine());
 
-                _claim.Enqueue(claims);
+                claim.AddClaim(claims);
 
             }
             void NextClaim()
             {
-                Console.Clear();
-                Queue<Claim> claims = new Queue<Claim>();                
-
-                Console.WriteLine(claims.Peek());
+                Console.Clear();                          
+                Console.WriteLine(claim.);
                 ContinueMessage();
             }           
                        
@@ -126,12 +124,9 @@ namespace Challenge2_KomodoClaimsDepartment
             void SeeAllClaims()
             {
                 Console.Clear();                
-                ColumnNames();
-                foreach (Claim claim in _claim)
-                {
-                    DisplayItems(claim);
-                    Console.WriteLine();
-                }
+                ColumnNames();                               
+                DisplayItems(claims);
+                Console.WriteLine();     
             }
             void ContinueMessage()
             {
@@ -162,7 +157,7 @@ namespace Challenge2_KomodoClaimsDepartment
             }
             void ClaimIdNumber()
             {
-               claims.ClaimID = _claim.Count;
+               
             }
         }
 

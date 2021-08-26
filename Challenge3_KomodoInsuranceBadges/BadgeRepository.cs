@@ -8,20 +8,29 @@ namespace Challenge3_KomodoInsuranceBadges
 {
     class BadgeRepository
     {
-        readonly Dictionary<string, string> _badgeID = new Dictionary<string, string>();
+        readonly Dictionary<string, List<string>> _badgeID = new Dictionary<string, List<string>>();
 
         // Create
-        public void NewBadgeNumber(Badge badge)
+        public bool NewBadgeNumber(string badgeNumber)
         {
-            _badgeID.Add(badge.BadgeID, badge.Door);
+            if (!_badgeID.ContainsKey(badgeNumber))
+            {
+                _badgeID.Add(badgeNumber, new List<string>());
+                return true;
+            }
+            else
+            {
+                _badgeID[badgeNumber] = new List<string>();
+                return false;
+            }
         }
         // Read
-        public void ReadBadges(Badge badge)
+        public Dictionary<string, List<string>> GetBadges()
         {
-            return ToString._badgeID[badge];
+            return _badgeID;
         }
         // Update
-        public void UpdateBadges(Badge badge)
+        public bool UpdateBadge()
         {
 
         }
@@ -29,6 +38,19 @@ namespace Challenge3_KomodoInsuranceBadges
         public bool DeleteBadges(Badge badge)
         {
             _badgeID.Remove(Badge);
+        }
+
+        public void GetBadgeValue<T>(string badgeNumber)
+        {
+            string door;
+            T retType;
+
+            _badgeID.TryGetValue(badgeNumber, out door);
+            try
+            {
+                retType = (T)badgeNumber;
+            }
+
         }
     }
 }

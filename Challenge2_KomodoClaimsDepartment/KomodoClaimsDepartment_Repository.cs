@@ -8,7 +8,7 @@ namespace Challenge2_KomodoClaimsDepartment
 {
     class KomodoClaimsDepartment_Repository
     {
-        readonly Queue<Claim> _claim = new Queue<Claim>();
+        public Queue<Claim> _claim = new Queue<Claim>();
         // C           
         public void AddClaim(Claim claim)
         {
@@ -22,10 +22,9 @@ namespace Challenge2_KomodoClaimsDepartment
         // U
 
         // D
-        public bool RemoveClaim(int claimID)
-        {
-            Claim claimsID = GetClaimByClaimID(claimID);
-            if (claimID == null)
+        public bool RemoveClaim()
+        {            
+            if (_claim == null)
             {
                 return false;
             }
